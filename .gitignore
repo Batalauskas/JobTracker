@@ -1,0 +1,62 @@
+# .NET
+bin/
+obj/
+*.user
+.vs/
+.vscode/settings.json
+*.dll
+*.pdb
+*.nupkg
+.nuget/
+packages/
+
+# Rider
+.idea/
+*.sln.iml
+
+# Node / Vite
+node_modules/
+frontend/dist/
+frontend/build/
+frontend/.vite/
+
+# Local env
+*.local
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+.test-results/
+
+# Build artifacts
+dist/
+build/
+
+# IDE
+.vscode/extensions.json
+
+# Misc
+*.backup
+.history/
+.claude/
+
+# Deployment
+.env.*
+*.bicepparam
+deployment-*.json

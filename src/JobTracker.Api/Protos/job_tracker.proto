@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package jobtracker.v1;
+
+option csharp_namespace = "JobTracker.Api.Grpc";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+enum ApplicationStatus {
+  APPLICATION_STATUS_UNSPECIFIED = 0;
+  APPLICATION_STATUS_DRAFT = 1;
+  APPLICATION_STATUS_APPLIED = 2;
+  APPLICATION_STATUS_INTERVIEW = 3;
+  APPLICATION_STATUS_OFFER = 4;
+  APPLICATION_STATUS_REJECTED = 5;
+  APPLICATION_STATUS_WITHDRAWN = 6;
+}
+
+message JobApplication {
+  string id = 1;
+  string company_name = 2;
+  string position = 3;
+  string location = 4;
+  int32 salary_min = 5; // 0 = not set, EUR/year
+  int32 salary_max = 6; // 0 = not set, EUR/year
+  ApplicationStatus status = 7;
+  string source = 8; // LinkedIn, StepStone, referral, ...
+  string job_url = 9;
+  string contact_person = 10;
+  string notes = 11;
+  google.protobuf.Timestamp applied_at = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
+}
+
+message CreateApplicationRequest {
+  string company_name = 1;
+  string position = 2;
+  string location = 3;
+  int32 salary_min = 4;
+  int32 salary_max = 5;
+  ApplicationStatus status = 6;
+  string source = 7;
+  string job_url = 8;
+  string contact_person = 9;
+  string notes = 10;
+  google.protobuf.Timestamp applied_at = 11;
+}
+
+message GetApplicationRequest {
+  string id = 1;
+}
+
+message ListApplicationsRequest {
+  // UNSPECIFIED means "all statuses".
+  ApplicationStatus status_filter = 1;
+  // Case-insensitive match against company, position and location.
+  string search = 2;
+}
+
+message ListApplicationsResponse {
+  repeated JobApplication applications = 1;
+}
+
+message UpdateApplicationRequest {
+  string id = 1;
+  string company_name = 2;
+  string position = 3;
+  string location = 4;
+  int32 salary_min = 5;
+  int32 salary_max = 6;
+  ApplicationStatus status = 7;
+  string source = 8;
+  string job_url = 9;
+  string contact_person = 10;
+  string notes = 11;
+  google.protobuf.Timestamp applied_at = 12;
+}
+
+message UpdateStatusRequest {
+  string id = 1;
+  ApplicationStatus status = 2;
+}
+
+message DeleteApplicationRequest {
+  string id = 1;
+}
+
+message StatusCount {
+  ApplicationStatus status = 1;
+  int32 count = 2;
+}
+
+message DashboardStats {
+  int32 total = 1;
+  int32 active = 2;     // applied + interview + offer
+  int32 interviews = 3;
+  int32 offers = 4;
+  int32 rejected = 5;
+  double response_rate = 6; // % of submitted applications with any response
+  repeated StatusCount pipeline = 7;
+}
+
+service JobApplicationService {
+  rpc CreateApplication(CreateApplicationRequest) returns (JobApplication);
+  rpc GetApplication(GetApplicationRequest) returns (JobApplication);
+  rpc ListApplications(ListApplicationsRequest) returns (ListApplicationsResponse);
+  rpc UpdateApplication(UpdateApplicationRequest) returns (JobApplication);
+  rpc UpdateStatus(UpdateStatusRequest) returns (JobApplication);
+  rpc DeleteApplication(DeleteApplicationRequest) returns (google.protobuf.Empty);
+  rpc GetDashboardStats(google.protobuf.Empty) returns (DashboardStats);
+}

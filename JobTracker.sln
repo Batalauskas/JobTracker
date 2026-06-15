@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobTracker.Api", "src\JobTracker.Api\JobTracker.Api.csproj", "{3340E54C-ED73-4B7C-9893-2B7E80E1EDD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{031ACE83-B10B-46A6-A6F4-64B9FD49D5F1}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		global.json = global.json
+		README.md = README.md
+		deploy.bicep = deploy.bicep
+		deploy.sh = deploy.sh
+		DEPLOYMENT.md = DEPLOYMENT.md
+		docker-compose.db.yml = docker-compose.db.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3340E54C-ED73-4B7C-9893-2B7E80E1EDD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3340E54C-ED73-4B7C-9893-2B7E80E1EDD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3340E54C-ED73-4B7C-9893-2B7E80E1EDD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3340E54C-ED73-4B7C-9893-2B7E80E1EDD3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
